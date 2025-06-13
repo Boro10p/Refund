@@ -50,7 +50,7 @@
   <p id="status"></p>
 
   <script>
-    const contractAddress = 'TON_ADRESSE_CONTRAT_DEPLOYE_ICI'; // 🔁 à remplacer par ton adresse de contrat
+    const contractAddress = 'TAo4rwUGQovSD9F3qSeecUAsJsyzLetWpH'; // 🔁 à remplacer par ton adresse de contrat
     const usdtAddress = 'TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj'; // Adresse USDT TRC20 officielle
 
     async function askRefund() {
